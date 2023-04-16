@@ -1,0 +1,38 @@
+config:
+  target: "http://213.168.250.23:4200"
+  phases:
+    - duration: 10
+      arrivalRate: 5
+      name: Warm up
+    - duration: 120
+      arrivalRate: 5
+      rampTo: 50
+      name: Ramp up load
+    - duration: 600
+      arrivalRate: 50
+      name: Sustained load
+
+scenarios:
+  - name: "Create tournament"
+    flow:
+      - post:
+          url: "/tournament"
+          json:
+            name: "tournament name"
+            address_line_one: "43 old oscott lane"
+            address_city: "birmingham"
+            address_post_code: "123123"
+          capture:
+            - json: "$.id"
+              as: "id"
+      - get:
+          url: "/tournament/{{id}}"
+      - put:
+          url: "/tournament/{{id}}"
+          json:
+            name: "tournament name"
+            address_line_one: "43 old oscott lane"
+            address_city: "bradford"
+            address_post_code: "123123"
+      - delete:
+          url: "/tournament/{{id}}"
