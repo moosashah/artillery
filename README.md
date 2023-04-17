@@ -5,7 +5,7 @@ Both were hosted on a nanode on linode.
 Both had a local postgresql client to connect to.
 
 
-![Linode details](images/Nanode.png)
+![Linode details](images/nanode-details.png)
 
 ### GO api
 Framework: fiber
